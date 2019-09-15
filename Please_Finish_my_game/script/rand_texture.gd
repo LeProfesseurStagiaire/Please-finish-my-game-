@@ -15,8 +15,7 @@ func random_texture(path):
 			files += random_texture(new_path)
 		else:
 			var name = path+"/"+file_name
-			if ! ".import" in name: 
-				files.push_back(name)
+			files.push_back(name)
 		file_name = dir.get_next()
 	return files[randi()%files.size()]
 	dir.list_dir_end()
