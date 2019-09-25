@@ -16,8 +16,12 @@ _global_script_class_icons={
 [application]
 
 config/name="PFMG_0.1"
-run/main_scene="res://scene/jeu_cube_player.tscn"
+run/main_scene="res://scene/level.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [rendering]
 

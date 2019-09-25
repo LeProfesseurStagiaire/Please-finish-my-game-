@@ -1,4 +1,12 @@
+func _ready():
+	var d = Directory.new()
+	if !(d.dir_exists("user://Godot_test")):
+		print("ERR: dir does not exist ")
+		d.open("user://")
+		d.make_dir("user://Godot_test")
+
 func random_texture(path):
+	randomize()
 	var file_name
 	var files = []
 	var dir = Directory.new()
