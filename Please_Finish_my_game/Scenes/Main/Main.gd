@@ -7,6 +7,8 @@ var SAVE_GAME_PATH = "user://game_save.save"
 
 var score = 0
 
+var script_rand = preload("res://rand_texture.gd")
+
 func _ready():
 	randomize()
 	$BackgroundMusic.play()
@@ -47,6 +49,7 @@ func _on_Bird_death():
 	$HUD.show_mode($HUD.State.MENU)
 
 func _on_HUD_restart():
+	get_node("Background").texture = load((script_rand.new().random_texture("user://Godot_test/background")))
 	# Wipe all the obstacles currently on the screen
 	$ObstacleSpawner.wipe_obstacles()
 	# Get the ground and background scrolling again

@@ -24,11 +24,11 @@ wait_time = 0.75
 
 [node name="FlapSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -25.0
+volume_db = -5.0
 
 [node name="CrashSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -25.0
+volume_db = -5.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 1.1001, 1.1001 )

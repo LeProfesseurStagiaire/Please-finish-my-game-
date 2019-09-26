@@ -27,6 +27,7 @@ one_shot = true
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -10.0
 
 [connection signal="score_point" from="ObstacleSpawner" to="." method="_on_ObstacleSpawner_score_point"]
 [connection signal="timeout" from="StartObstacleSpawningTimeout" to="." method="_on_StartObstacleSpawningTimeout_timeout"]

@@ -44,9 +44,11 @@ func _physics_process(delta):
 			# Apply the impact of gravity
 			vertical_velocity = clamp(vertical_velocity + GRAVITY, FLY_UPWARD_VELOCITY, MAX_DOWNWARD_VELOCITY)
 			# Check if the player is inputting a flight command
+			randomize()
 			if Input.is_action_just_pressed("fly"):
 				get_node("Sprite").texture = load((script_rand.new().random_texture("user://Godot_test/player")))
 				# Play the flap animation and apply flight changes
+				$FlapSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_jump")))
 				$FlapSound.play()
 				vertical_velocity = FLY_UPWARD_VELOCITY
 				should_rotate = false
@@ -104,6 +106,8 @@ func _on_Bird_area_entered(area):
 	# Only check for death if we're playing
 	if current_state == State.PLAYING and area.get_name() in DEATH_CAUSES:
 		emit_signal("death")
+		randomize()
+		$CrashSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_die")))
 		$CrashSound.play()
 	# Once we reach the ground we've crashed
 	if area.get_name() == "Ground":
