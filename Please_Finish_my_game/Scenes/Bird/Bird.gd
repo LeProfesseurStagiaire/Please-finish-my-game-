@@ -27,6 +27,8 @@ var should_rotate = false
 
 var script_rand = preload("res://rand_texture.gd")
 
+var jump_count = 0
+
 func _ready():
 	# Get the screen size
 	screen_size = get_viewport_rect().size
@@ -46,8 +48,14 @@ func _physics_process(delta):
 			# Check if the player is inputting a flight command
 			randomize()
 			if Input.is_action_just_pressed("fly"):
-				get_node("Sprite").texture = load((script_rand.new().random_texture("user://Godot_test/player")))
-				# Play the flap animation and apply flight changes
+				jump_count += 1
+				get_node("Particles2D").texture = load((script_rand.new().random_texture("user://Godot_test/player")))
+				$bird_anim.play("fly")
+				print(jump_count)
+				if jump_count < 3 :
+					get_node("Sprite").texture = load((script_rand.new().random_texture("user://Godot_test/player")))
+					# Play the flap animation and apply flight change
+					jump_count = 0
 				$FlapSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_jump")))
 				$FlapSound.play()
 				vertical_velocity = FLY_UPWARD_VELOCITY
