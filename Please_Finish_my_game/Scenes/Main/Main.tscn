@@ -29,6 +29,10 @@ one_shot = true
 stream = ExtResource( 7 )
 volume_db = -10.0
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 245.547, 317.984 )
+current = true
+
 [connection signal="score_point" from="ObstacleSpawner" to="." method="_on_ObstacleSpawner_score_point"]
 [connection signal="timeout" from="StartObstacleSpawningTimeout" to="." method="_on_StartObstacleSpawningTimeout_timeout"]
 [connection signal="restart" from="HUD" to="." method="_on_HUD_restart"]

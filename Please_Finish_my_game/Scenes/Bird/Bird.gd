@@ -29,13 +29,49 @@ var script_rand = preload("res://rand_texture.gd")
 
 var jump_count = 0
 
+var shake_amount = 10.0
+
+#enter
+var shake_power = 10
+var shake_time = 0.15
+var isShake = false
+var curPos
+var elapsedtime = 0
+onready var camera = get_node("../Camera2D")
+
+export var corlor = Color(0,0,0,0)
+
+func shake(delta):
+    if elapsedtime<shake_time:
+        camera.offset =  Vector2(randf(), randf()) * shake_power
+        elapsedtime += delta
+    else:
+        isShake = false
+        elapsedtime = 0
+        camera.offset = curPos   
+
+#out
+
+
 func _ready():
+	
+	#temp
+	randomize()
+	curPos = camera.offset
+	#temp
+	
 	# Get the screen size
 	screen_size = get_viewport_rect().size
 	# Ensure the player does not have control on creation
 	set_player_state(State.AUTO_PILOT)
 
 func _physics_process(delta):
+	
+	#temp
+	if isShake:
+		shake(delta)
+	#temp
+	 
 	# Start the phase of player control if flight is triggered during the passive phase
 	if current_state == State.AUTO_PILOT and Input.is_action_just_pressed("fly"):
 		emit_signal("start_flight")
@@ -49,13 +85,22 @@ func _physics_process(delta):
 			randomize()
 			if Input.is_action_just_pressed("fly"):
 				jump_count += 1
-				get_node("Particles2D").texture = load((script_rand.new().random_texture("user://Godot_test/player")))
-				$bird_anim.play("fly")
-				print(jump_count)
-				if jump_count < 3 :
+				if !jump_count < 3 :
 					get_node("Sprite").texture = load((script_rand.new().random_texture("user://Godot_test/player")))
 					# Play the flap animation and apply flight change
 					jump_count = 0
+					get_node("Particles2D").texture = $Sprite.texture
+					get_node("Particles2D").emitting = true
+					var shake_time = 0.20
+					shake_power = 10
+					elapsedtime = 0
+					isShake = true
+					get_node("../Background/ColorRect").color = Color(rand_range(0,1),rand_range(0,1),rand_range(0,1),0.5)
+				else :
+					var shake_time = 0.04
+					shake_power = 2.5
+					elapsedtime = 0
+					isShake = true
 				$FlapSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_jump")))
 				$FlapSound.play()
 				vertical_velocity = FLY_UPWARD_VELOCITY
@@ -114,6 +159,7 @@ func _on_Bird_area_entered(area):
 	# Only check for death if we're playing
 	if current_state == State.PLAYING and area.get_name() in DEATH_CAUSES:
 		emit_signal("death")
+		jump_count = 0
 		randomize()
 		$CrashSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_die")))
 		$CrashSound.play()

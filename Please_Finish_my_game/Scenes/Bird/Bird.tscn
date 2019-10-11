@@ -6,10 +6,10 @@
 [ext_resource path="res://Art/place_older/placeholder_player.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 17.5045
+radius = 44.7761
 
 [sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.792593, 1 )
+offsets = PoolRealArray( 0, 0.57037, 1 )
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0 )
 
 [sub_resource type="GradientTexture" id=3]
@@ -19,8 +19,11 @@ gradient = SubResource( 2 )
 emission_shape = 1
 emission_sphere_radius = 0.01
 flag_disable_z = true
-spread = 140.17
-gravity = Vector3( 0, 0, 0 )
+spread = 180.0
+flatness = 1.0
+gravity = Vector3( -1000, 0, 0 )
+initial_velocity = 250.0
+initial_velocity_random = 1.0
 angular_velocity = 720.0
 angular_velocity_random = 1.0
 orbit_velocity = 0.0
@@ -33,14 +36,12 @@ tangential_accel = 100.0
 tangential_accel_random = 1.0
 angle = 720.0
 angle_random = 1.0
-scale = 5.0
 scale_random = 1.0
 color_ramp = SubResource( 3 )
-hue_variation = 1.0
-hue_variation_random = 1.0
 
 [sub_resource type="Animation" id=5]
 resource_name = "fly"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Particles2D:emitting")
 tracks/0/interp = 1
@@ -48,7 +49,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.5 ),
+"times": PoolRealArray( 0, 0.1, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ false, true, false ]
@@ -64,6 +65,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+corlor = Color( 0, 0, 0.858824, 0.533333 )
 
 [node name="RotationBeginTimout" type="Timer" parent="."]
 wait_time = 0.75
@@ -77,18 +79,22 @@ stream = ExtResource( 3 )
 volume_db = -5.0
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 1.1001, 1.1001 )
+scale = Vector2( 2.9587, 2.9587 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
+scale = Vector2( 1, 1 )
 emitting = false
-amount = 15
+amount = 10
+lifetime = 0.3
 one_shot = true
-explosiveness = 0.68
+explosiveness = 1.0
+fract_delta = false
 local_coords = false
+draw_order = 1
 process_material = SubResource( 4 )
 
 [node name="bird_anim" type="AnimationPlayer" parent="."]
