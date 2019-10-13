@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scenes/Bird/Bird.gd" type="Script" id=1]
-[ext_resource path="res://Audio/Sounds/flap.wav" type="AudioStream" id=2]
+[ext_resource path="res://Audio/Sounds/4538.wav" type="AudioStream" id=2]
 [ext_resource path="res://Audio/Sounds/splat.wav" type="AudioStream" id=3]
 [ext_resource path="res://Art/place_older/placeholder_player.png" type="Texture" id=4]
 
@@ -72,11 +72,10 @@ wait_time = 0.75
 
 [node name="FlapSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
-volume_db = -5.0
 
 [node name="CrashSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
-volume_db = -5.0
+volume_db = 5.0
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2.9587, 2.9587 )
@@ -86,7 +85,6 @@ texture = ExtResource( 4 )
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-scale = Vector2( 1, 1 )
 emitting = false
 amount = 10
 lifetime = 0.3

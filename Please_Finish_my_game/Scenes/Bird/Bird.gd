@@ -85,7 +85,9 @@ func _physics_process(delta):
 			randomize()
 			if Input.is_action_just_pressed("fly"):
 				jump_count += 1
+				$FlapSound.stream = load("res://Audio/Sounds/4538.wav")
 				if !jump_count < 3 :
+					$FlapSound.stream = load("res://Audio/Sounds/4513.wav")
 					get_node("Sprite").texture = load((script_rand.new().random_texture("user://Godot_test/player")))
 					# Play the flap animation and apply flight change
 					jump_count = 0
@@ -101,7 +103,7 @@ func _physics_process(delta):
 					shake_power = 2.5
 					elapsedtime = 0
 					isShake = true
-				$FlapSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_jump")))
+#				$FlapSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_jump")))
 				$FlapSound.play()
 				vertical_velocity = FLY_UPWARD_VELOCITY
 				should_rotate = false
@@ -161,12 +163,12 @@ func _on_Bird_area_entered(area):
 		emit_signal("death")
 		jump_count = 0
 		randomize()
-		$CrashSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_die")))
+#		$CrashSound.stream = load((script_rand.new().random_texture("user://Godot_test/sound_die")))
 		$CrashSound.play()
 	# Once we reach the ground we've crashed
 	if area.get_name() == "Ground":
 		# Play the crash sound again when we hit the ground
-		if current_state == State.CRASHING:
+		if current_state != State.CRASHING:
 			$CrashSound.play()
 		set_player_state(State.CRASHED)
 	# Until then we're still crashing

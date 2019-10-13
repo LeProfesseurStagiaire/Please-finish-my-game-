@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pfmg_music.wav-35b9329a6ec60e8a688f388aa3923631.sample"
+
+[deps]
+
+source_file="res://Audio/Music/pfmg_music.wav"
+dest_files=[ "res://.import/pfmg_music.wav-35b9329a6ec60e8a688f388aa3923631.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=true
+compress/mode=0

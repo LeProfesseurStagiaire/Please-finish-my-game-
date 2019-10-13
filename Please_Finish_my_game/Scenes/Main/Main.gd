@@ -29,6 +29,7 @@ func _on_ObstacleSpawner_score_point():
 	$HUD.set_score_label(score)
 
 func _on_Bird_death():
+	AudioServer.set_bus_effect_enabled(0,0, true)
 	# Stop further obstacle generation
 	$ObstacleSpawner.stop_generation()
 	# Stop the obstacles from moving further
@@ -49,6 +50,8 @@ func _on_Bird_death():
 	$HUD.show_mode($HUD.State.MENU)
 
 func _on_HUD_restart():
+	$BackgroundMusic.play(0.0)
+	AudioServer.set_bus_effect_enabled(0,0, false)
 	#get_node("Background").texture = load((script_rand.new().random_texture("user://Godot_test/background")))
 	# Wipe all the obstacles currently on the screen
 	$ObstacleSpawner.wipe_obstacles()
